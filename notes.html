@@ -1,0 +1,238 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Taking App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        .edit-input {
+            display: none;
+        }
+        .note-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .note-form input, .note-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #364153;
+            border-radius: 5px;
+            background-color: #1e2939;
+            color: #e0e0e0;
+            font-size: 1em;
+        }
+        .note-form button {
+            padding: 10px 20px;
+            background-color: #03dac6;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .note-form button:hover {
+            background-color: #018786;
+        }
+        
+        .notes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .note {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 5px;
+            width: 30%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .note .update-button{
+            display: none;
+        }
+        .note .delete-button {
+            background-color: #cf6679;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .note .delete-button:hover {
+            background-color: #b00020;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+    <div class="container mx-auto p-4">
+        <header class="flex justify-between items-center py-4">
+            <h1 class="text-3xl font-bold text-gray-200">Note Taking App</h1>
+            <div class="relative">
+                <input type="text" id="search" placeholder="Search notes..." class="pl-10 pr-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+            </div>
+        </header>
+
+        <main>
+            <div class="note-form">
+                <input type="text" id="note-title" placeholder="Note Title">
+                <textarea id="note-content" placeholder="Note Content"></textarea>
+                <button onclick="addNote()">Add Note</button>
+            </div>
+            <div class="notes" id="notes">
+                <!-- Notes will be added here dynamically -->
+            </div>
+
+
+            <div id="notes-container" class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class=" bg-gray-800 p-4 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold text-gray-200">Note Title 1</h2>
+                    <input type="text" class="edit-input text-xl font-semibold text-gray-200 bg-gray-800 border-none focus:outline-none">
+                    <p class="text-gray-400 mt-2">This is the content of note 1. It contains some brief information about the note.</p>
+                    <textarea class="edit-input text-gray-400 mt-2 bg-gray-800 border-none focus:outline-none"></textarea>
+                    <div class="flex space-x-2 mt-2">
+                        <button class="edit-button px-4 py-2 bg-green-500 text-white rounded-lg" onclick="editNoteContent(this)">Edit</button>
+                        <!-- <button class="update-button px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="updateNoteContent(this)">Update</button> -->
+                    </div>
+                </div>
+                <div class=" bg-gray-800 p-4 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold text-gray-200">Note Title 2</h2>
+                    <input type="text" class="edit-input text-xl font-semibold text-gray-200 bg-gray-800 border-none focus:outline-none">
+                    <p class="text-gray-400 mt-2">This is the content of note 2. It contains some brief information about the note.</p>
+                    <textarea class="edit-input text-gray-400 mt-2 bg-gray-800 border-none focus:outline-none"></textarea>
+                    <div class="flex space-x-2 mt-2">
+                        <button class="edit-button px-4 py-2 bg-green-500 text-white rounded-lg" onclick="editNoteContent(this)">Edit</button>
+                        <!-- <button class="update-button px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="updateNoteContent(this)">Update</button> -->
+                    </div>
+                </div>
+                <div class=" bg-gray-800 p-4 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold text-gray-200">Note Title 3</h2>
+                    <input type="text" class="edit-input text-xl font-semibold text-gray-200 bg-gray-800 border-none focus:outline-none">
+                    <p class="text-gray-400 mt-2">This is the content of note 3. It contains some brief information about the note.</p>
+                    <textarea class="edit-input text-gray-400 mt-2 bg-gray-800 border-none focus:outline-none"></textarea>
+                    <div class="flex space-x-2 mt-2">
+                        <button class="edit-button px-4 py-2 bg-green-500 text-white rounded-lg" onclick="editNoteContent(this)">Edit</button>
+                        <!-- <button class="update-button px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="updateNoteContent(this)">Update</button> -->
+                    </div>
+                </div>
+                <div class=" bg-gray-800 p-4 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold text-gray-200">Note Title 4</h2>
+                    <input type="text" class="edit-input text-xl font-semibold text-gray-200 bg-gray-800 border-none focus:outline-none">
+                    <p class="text-gray-400 mt-2">This is the content of note 4. It contains some brief information about the note.</p>
+                    <textarea class="edit-input text-gray-400 mt-2 bg-gray-800 border-none focus:outline-none"></textarea>
+                    <div class="flex space-x-2 mt-2">
+                        <button class="edit-button px-4 py-2 bg-green-500 text-white rounded-lg" onclick="editNoteContent(this)">Edit</button>
+                        <!-- <button class="update-button px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="updateNoteContent(this)">Update</button> -->
+                    </div>
+                </div>
+                <div class=" bg-gray-800 p-4 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold text-gray-200">Note Title 5</h2>
+                    <input type="text" class="edit-input text-xl font-semibold text-gray-200 bg-gray-800 border-none focus:outline-none">
+                    <p class="text-gray-400 mt-2">This is the content of note 5. It contains some brief information about the note.</p>
+                    <textarea class="edit-input text-gray-400 mt-2 bg-gray-800 border-none focus:outline-none"></textarea>
+                    <div class="flex space-x-2 mt-2">
+                        <button class="edit-button px-4 py-2 bg-green-500 text-white rounded-lg" onclick="editNoteContent(this)">Edit</button>
+                        <!-- <button class="update-button px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="updateNoteContent(this)">Update</button> -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.getElementById('search').addEventListener('input', function() {
+            const searchQuery = this.value.toLowerCase();
+            const notes = document.querySelectorAll('.note');
+            notes.forEach(note => {
+                const title = note.querySelector('h2');
+                const content = note.querySelector('p');
+                const titleText = title.textContent.toLowerCase();
+                const contentText = content.textContent.toLowerCase();
+                
+                title.innerHTML = titleText.replace(new RegExp(searchQuery, 'gi'), match => `<span class="highlight">${match}</span>`);
+                content.innerHTML = contentText.replace(new RegExp(searchQuery, 'gi'), match => `<span class="highlight">${match}</span>`);
+            });
+        });
+
+        function addNote() {
+            const title = document.getElementById('note-title').value;
+            const content = document.getElementById('note-content').value;
+
+            if (title && content) {
+                const notesContainer = document.getElementById('notes');
+                const note = document.createElement('div');
+                note.classList = 'note bg-gray-800 p-4 rounded-lg shadow-md';
+
+                note.innerHTML = `
+                    <h2 class="text-xl font-semibold text-gray-200">${title}</h2>
+                    <input type="text" class="edit-input text-xl font-semibold text-gray-200 bg-gray-800 border-none focus:outline-none">
+                    <p class="text-gray-400 mt-2">${content}</p>
+                    <textarea class="edit-input text-gray-400 mt-2 bg-gray-800 border-none focus:outline-none"></textarea>
+                    <div class="flex space-x-2 mt-2">
+                        <button class="edit-button px-4 py-2 bg-green-500 text-white rounded-lg" onclick="editNoteContent(this)">Edit</button>
+                        <button class="update-button px-4 py-2 bg-blue-500 text-white rounded-lg" onclick="updateNoteContent(this)">Update</button>
+                        <button class="delete-button" onclick="deleteNote(this)">Delete</button>
+                    </div>
+                `;
+
+                notesContainer.appendChild(note);
+
+                document.getElementById('note-title').value = '';
+                document.getElementById('note-content').value = '';
+            } else {
+                alert('Please fill out both fields');
+            }
+        }
+
+        function deleteNote(button) {
+            const note = button.parentElement.parentElement;
+            note.remove();
+        }
+
+        function editNoteContent(buttonElement) {
+            const noteElement = buttonElement.closest('.note');
+            const titleElement = noteElement.querySelector('h2');
+            const contentElement = noteElement.querySelector('p');
+            const titleInput = noteElement.querySelector('input');
+            const contentTextarea = noteElement.querySelector('textarea');
+            const updateButton = noteElement.querySelector('.update-button');
+
+            titleElement.style.display = 'none';
+            contentElement.style.display = 'none';
+            titleInput.style.display = 'block';
+            contentTextarea.style.display = 'block';
+            updateButton.style.display = 'block';
+
+            titleInput.value = titleElement.textContent;
+            contentTextarea.value = contentElement.textContent;
+        }
+
+        function updateNoteContent(buttonElement) {
+            const noteElement = buttonElement.closest('.note');
+            const titleElement = noteElement.querySelector('h2');
+            const contentElement = noteElement.querySelector('p');
+            const titleInput = noteElement.querySelector('input');
+            const contentTextarea = noteElement.querySelector('textarea');
+
+            titleElement.textContent = titleInput.value;
+            contentElement.textContent = contentTextarea.value;
+
+            titleElement.style.display = 'block';
+            contentElement.style.display = 'block';
+            titleInput.style.display = 'none';
+            contentTextarea.style.display = 'none';
+            buttonElement.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
